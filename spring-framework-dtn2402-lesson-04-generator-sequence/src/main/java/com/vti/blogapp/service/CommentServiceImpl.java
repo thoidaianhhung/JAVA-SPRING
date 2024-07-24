@@ -12,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-
 @Service
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
@@ -28,9 +26,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Page<CommentDto> findByPostId(Long postId, Pageable pageable) {
-//        return commentRepository.findByPostId(postId, pageable)
-//                .map(CommentMapper::map);
-        return Page.empty();
+        return commentRepository.findByPostId(postId, pageable)
+                .map(CommentMapper::map);
     }
 
     @Override
@@ -48,7 +45,7 @@ public class CommentServiceImpl implements CommentService {
         }
         var post = optional.get();
         var comment = CommentMapper.map(form);
-        comment.setPosts(Arrays.asList(post));
+        comment.setPost(post);
         var savedComment = commentRepository.save(comment);
         return CommentMapper.map(savedComment);
     }

@@ -6,9 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +15,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -25,7 +23,17 @@ import java.util.List;
 public class Comment {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "comment_id_generator",
+            sequenceName = "comment_id_sequence",
+            initialValue = 99,
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "comment_id_generator"
+    )
     private Long id;
 
     @Column(name = "name", length = 50, nullable = false)
@@ -45,11 +53,7 @@ public class Comment {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @ManyToMany
-    @JoinTable(
-            name = "post_comment",
-            joinColumns = @JoinColumn(name = "comment_id"),
-            inverseJoinColumns = @JoinColumn(name = "post_id")
-    )
-    private List<Post> posts;
+    @ManyToOne
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private Post post;
 }
