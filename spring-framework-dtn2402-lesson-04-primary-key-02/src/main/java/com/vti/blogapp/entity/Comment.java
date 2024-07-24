@@ -1,33 +1,33 @@
 package com.vti.blogapp.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "comment")
+@IdClass(Comment.PrimaryKey.class)
 public class Comment {
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    @Id
     @Column(name = "email", length = 75, nullable = false)
     private String email;
 
@@ -42,6 +42,18 @@ public class Comment {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "comment")
-    private List<PostComment> postComments;
+    @ManyToOne
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private Post post;
+
+    @Getter
+    @Setter
+    @Embeddable
+    public static class PrimaryKey implements Serializable {
+        @Column(name = "name", length = 50, nullable = false)
+        private String name;
+
+        @Column(name = "email", length = 75, nullable = false)
+        private String email;
+    }
 }

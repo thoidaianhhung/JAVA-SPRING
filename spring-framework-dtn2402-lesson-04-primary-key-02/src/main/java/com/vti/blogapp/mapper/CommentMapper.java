@@ -16,9 +16,10 @@ public class CommentMapper {
 
     public static CommentDto map(Comment comment) {
         var dto = new CommentDto();
-        dto.setId(comment.getId());
-        dto.setName(comment.getName());
-        dto.setEmail(comment.getEmail());
+        var pk = new Comment.PrimaryKey();
+        pk.setName(comment.getName());
+        pk.setEmail(comment.getEmail());
+        dto.setPk(pk);
         dto.setBody(comment.getBody());
         dto.setCreatedAt(comment.getCreatedAt());
         dto.setUpdatedAt(comment.getUpdatedAt());
