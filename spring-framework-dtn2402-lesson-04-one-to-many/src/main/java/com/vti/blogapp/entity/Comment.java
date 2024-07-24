@@ -1,14 +1,12 @@
 package com.vti.blogapp.entity;
 
-import com.vti.blogapp.converter.PostStatusConverter;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,31 +14,25 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "post")
-public class Post {
+@Table(name = "comment")
+public class Comment {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", length = 50, nullable = false)
-    private String title;
+    @Column(name = "name", length = 50, nullable = false)
+    private String name;
 
-    @Column(name = "content", length = 150, nullable = false)
-    private String content;
+    @Column(name = "email", length = 75, nullable = false)
+    private String email;
 
-    @Column(name = "description", length = 100, nullable = false)
-    private String description;
-
-    @Column(name = "status", nullable = false)
-    // @Enumerated(value = EnumType.STRING)
-    @Convert(converter = PostStatusConverter.class)
-    private Status status;
+    @Column(name = "body", length = 100, nullable = false)
+    private String body;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
@@ -50,10 +42,10 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "post")
-    private Comment comment;
-
-    public enum Status {
-        OPENING, CLOSED
-    }
+    @ManyToOne
+    @JoinColumn(
+            name = "post_id",
+            referencedColumnName = "id"
+    )
+    private Post post;
 }
