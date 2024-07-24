@@ -4,8 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -21,15 +19,9 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "comment")
-@IdClass(Comment.PrimaryKey.class)
 public class Comment {
-    @Id
-    @Column(name = "name", length = 50, nullable = false)
-    private String name;
-
-    @Id
-    @Column(name = "email", length = 75, nullable = false)
-    private String email;
+    @EmbeddedId
+    private PrimaryKey pk;
 
     @Column(name = "body", length = 100, nullable = false)
     private String body;
