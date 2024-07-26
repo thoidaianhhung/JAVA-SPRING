@@ -8,31 +8,32 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "post")
-public class Post {
+@Table(name = "user")
+public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", length = 50, nullable = false)
-    private String title;
+    @Column(name = "name", length = 50, nullable = false)
+    private String name;
 
-    @Column(name = "content", length = 150, nullable = false)
-    private String content;
+    @Column(name = "user_name", length = 50, nullable = false, unique = true)
+    private String userName;
 
-    @Column(name = "description", length = 100, nullable = false)
-    private String description;
+    @Column(name = "email", length = 50, nullable = false, unique = true)
+    private String email;
 
-    @Column(name = "status", nullable = false)
-    @Convert(converter = PostStatusConverter.class)
+    @Column(name = "password", nullable = false, length = 72)
+    private String password;
+
+    @Column(name = "role", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private Status status;
+    private Role role;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
@@ -42,10 +43,7 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
-
-    public enum Status {
-        OPENING, CLOSED
+    public enum Role {
+        ADMIN, MANAGER, EMPLOYEE;
     }
 }
