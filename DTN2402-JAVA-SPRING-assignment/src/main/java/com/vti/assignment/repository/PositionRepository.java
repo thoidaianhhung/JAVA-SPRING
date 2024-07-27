@@ -1,6 +1,6 @@
-package com.vti.Assignment1.repository;
+package com.vti.assignment.repository;
 
-import com.vti.Assignment1.entity.Position;
+import com.vti.assignment.entity.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PositionRepository extends JpaRepository<Position, Integer> {

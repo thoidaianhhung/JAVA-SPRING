@@ -1,5 +1,7 @@
-package com.vti.Assignment1.dto;
+package com.vti.assignment.dto;
 
+import com.vti.assignment.entity.Department;
+import com.vti.assignment.entity.Position;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +18,9 @@ public class AccountDto {
 
     private String fullName;
 
-    private int departmentId;
+    private Department departmentId;
 
-    private int positionId;
+    private Position positionId;
 
     private LocalDate createdDate;
 }

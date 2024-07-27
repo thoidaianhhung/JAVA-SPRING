@@ -1,8 +1,10 @@
-package com.vti.Assignment1.entity;
+package com.vti.assignment.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,9 +16,12 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "position_name", nullable = false)
     private PositionName positionName;
+
+    @OneToMany(mappedBy = "position")
+    private List<Account> accounts;
 
     public enum PositionName {
         DEV, TEST, SCRUM_MASTER, PM;

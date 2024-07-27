@@ -1,4 +1,4 @@
-package com.vti.Assignment1.entity;
+package com.vti.assignment.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

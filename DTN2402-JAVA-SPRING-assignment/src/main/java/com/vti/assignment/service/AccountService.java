@@ -1,12 +1,12 @@
-package com.vti.Assignment1.service;
+package com.vti.assignment.service;
 
-import com.vti.Assignment1.dto.AccountDto;
-import com.vti.Assignment1.form.AccountCreateForm;
-import com.vti.Assignment1.form.AccountUpdateForm;
+import com.vti.assignment.dto.AccountDto;
+import com.vti.assignment.form.AccountCreateForm;
+import com.vti.assignment.form.AccountUpdateForm;
 
 import java.util.List;
 
-public interface IAccountService {
+public interface AccountService {
     List<AccountDto> findAll();
 
     AccountDto findById(Integer id);

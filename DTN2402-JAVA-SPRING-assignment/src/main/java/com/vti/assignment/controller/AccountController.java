@@ -1,9 +1,9 @@
-package com.vti.Assignment1.controller;
+package com.vti.assignment.controller;
 
-import com.vti.Assignment1.dto.AccountDto;
-import com.vti.Assignment1.form.AccountCreateForm;
-import com.vti.Assignment1.form.AccountUpdateForm;
-import com.vti.Assignment1.service.IAccountService;
+import com.vti.assignment.dto.AccountDto;
+import com.vti.assignment.form.AccountCreateForm;
+import com.vti.assignment.form.AccountUpdateForm;
+import com.vti.assignment.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class AccountController {
-    private IAccountService service;
+    private AccountService service;
 
     @GetMapping("/api/v1/accounts")
     public List<AccountDto> findAll(){

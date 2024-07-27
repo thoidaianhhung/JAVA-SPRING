@@ -1,11 +1,11 @@
-package com.vti.Assignment1.service;
+package com.vti.assignment.service;
 
-import com.vti.Assignment1.dto.AccountDto;
-import com.vti.Assignment1.entity.Account;
-import com.vti.Assignment1.form.AccountCreateForm;
-import com.vti.Assignment1.form.AccountUpdateForm;
-import com.vti.Assignment1.mapper.AccountMapper;
-import com.vti.Assignment1.repository.AccountRepository;
+import com.vti.assignment.dto.AccountDto;
+import com.vti.assignment.entity.Account;
+import com.vti.assignment.form.AccountCreateForm;
+import com.vti.assignment.form.AccountUpdateForm;
+import com.vti.assignment.mapper.AccountMapper;
+import com.vti.assignment.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class AccountServiceImplement implements IAccountService{
+public class AccountServiceImplement implements AccountService {
     private AccountRepository repository;
     @Override
     public List<AccountDto> findAll() {

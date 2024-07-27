@@ -1,6 +1,6 @@
-package com.vti.Assignment1.dto;
+package com.vti.assignment.dto;
 
-import com.vti.Assignment1.entity.Position;
+import com.vti.assignment.entity.Position;
 import lombok.Getter;
 import lombok.Setter;
 

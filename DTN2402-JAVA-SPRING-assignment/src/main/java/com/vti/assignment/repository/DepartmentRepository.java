@@ -1,6 +1,6 @@
-package com.vti.Assignment1.repository;
+package com.vti.assignment.repository;
 
-import com.vti.Assignment1.entity.Department;
+import com.vti.assignment.entity.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DepartmentRepository extends JpaRepository<Department, Integer> {
